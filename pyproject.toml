@@ -1,0 +1,17 @@
+[tool.poetry]
+name = "quantization-experiments"
+version = "0.1.0"
+description = ""
+authors = ["hchen549 <hchen549@wisc.edu>"]
+readme = "README.md"
+
+[tool.poetry.dependencies]
+python = "^3.10"
+pandas = "^2.1.3"
+torch = "2.1.0"
+tqdm = "^4.66.1"
+
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
