@@ -1,3 +1,7 @@
+import os, sys
+from urllib.request import urlretrieve
+import torch
+from torch import nn
 
 def get_model_flops(model, inputs):
     num_macs = profile_macs(model, inputs)
@@ -14,8 +18,7 @@ def get_model_size(model: nn.Module, data_width=32):
     return num_elements * data_width
 
 def download_url(url, model_dir='.', overwrite=False):
-    import os, sys
-    from urllib.request import urlretrieve
+    
     target_dir = url.split('/')[-1]
     model_dir = os.path.expanduser(model_dir)
     try:
