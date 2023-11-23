@@ -1,5 +1,5 @@
 src/data/cifar10/cifar-10-python.tar.gz
 
 # Python bytecode files
-__pycache__/
+__pycache__/*
 *.pyc
