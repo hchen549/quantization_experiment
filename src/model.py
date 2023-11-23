@@ -37,9 +37,9 @@ class VGG(nn.Module):
         x = self.backbone(x)
 
         # avgpool: [N, 512, 2, 2] => [N, 512]
-        # x = x.mean([2, 3])
+        x = x.mean([2, 3])
         x = x.view(x.shape[0], -1)
-
+    
         # classifier: [N, 512] => [N, 10]
         x = self.classifier(x)
         return x

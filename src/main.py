@@ -21,6 +21,15 @@ def main():
     
     dataset, dataloader = load_data()
     
+    # inputs, targets = next(iter(dataloader["test"]))
+    # inputs = inputs.to(device)
+    # targets = targets.to(device)
+    
+    # print(f"input shape: {inputs.shape}")
+    
+    # output = model(inputs)
+    
+    
     fp32_model_accuracy = evaluate(device, model, dataloader['test'])
     # fp32_model_size = get_model_size(model)
     print(f"fp32 model has accuracy={fp32_model_accuracy:.2f}%")
