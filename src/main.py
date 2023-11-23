@@ -21,10 +21,15 @@ def main():
     
     dataset, dataloader = load_data()
     
-    fp32_model_accuracy = evaluate(device, model, dataloader['test'])
-    # fp32_model_size = get_model_size(model)
-    print(f"fp32 model has accuracy={fp32_model_accuracy:.2f}%")
-    # print(f"fp32 model has size={fp32_model_size/MiB:.2f} MiB")
+    Byte = 8
+    KiB = 1024 * Byte
+    MiB = 1024 * KiB
+    GiB = 1024 * MiB
+    
+    # fp32_model_accuracy = evaluate(device, model, dataloader['test'])
+    fp32_model_size = get_model_size(model)
+    # print(f"fp32 model has accuracy={fp32_model_accuracy:.2f}%")
+    print(f"fp32 model has size={fp32_model_size/MiB:.2f} MiB")
 
 if __name__ == '__main__':
     main()
