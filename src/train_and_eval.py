@@ -46,39 +46,34 @@ def train(
             
 @torch.inference_mode()
 def evaluate(
-    device: torch.device,
     model: nn.Module,
     dataloader: DataLoader,
     extra_preprocess = None
 ) -> float:
-    
-    
-    model.eval()
+  model.eval()
 
-    num_samples = 0
-    num_correct = 0
+  num_samples = 0
+  num_correct = 0
 
-    for inputs, targets in tqdm(dataloader, desc="eval", leave=False):
-        # Move the data from CPU to GPU
-        inputs = inputs.to(device)
-        if extra_preprocess is not None:
-            for preprocess in extra_preprocess:
-                inputs = preprocess(inputs)
+  for inputs, targets in tqdm(dataloader, desc="eval", leave=False):
+    # Move the data from CPU to GPU
+    inputs = inputs.cuda()
+    if extra_preprocess is not None:
+        for preprocess in extra_preprocess:
+            inputs = preprocess(inputs)
 
-        targets = targets.to(device)
+    targets = targets.cuda()
 
-        # Inference
-        outputs = model(inputs)
+    # Inference
+    outputs = model(inputs)
 
-        # Convert logits to class indices
-        outputs = outputs.argmax(dim=1)
+    # Convert logits to class indices
+    outputs = outputs.argmax(dim=1)
 
-        # Update metrics
-        num_samples += targets.size(0)
-        num_correct += (outputs == targets).sum()
+    # Update metrics
+    num_samples += targets.size(0)
+    num_correct += (outputs == targets).sum()
 
-    return (num_correct / num_samples * 100).item()
-                
-            
+  return (num_correct / num_samples * 100).item()
             
             

@@ -31,7 +31,7 @@ def load_data(image_size = 32):
     for split in ['train', 'test']:
         dataloader[split] = DataLoader(
             dataset[split],
-            batch_size=16,
+            batch_size=512,
             shuffle=(split == 'train'),
             num_workers=0,
             pin_memory=True,
