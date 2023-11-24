@@ -122,6 +122,22 @@ files = [
 ]
 
 [[package]]
+name = "fast-pytorch-kmeans"
+version = "0.2.0.1"
+description = "a fast kmeans clustering algorithm implemented in pytorch"
+optional = false
+python-versions = "*"
+files = [
+    {file = "fast_pytorch_kmeans-0.2.0.1-py3-none-any.whl", hash = "sha256:682c782ef4e639d9a58e1614dc1a02fe5413aa7d715abbb12fac0a9086acb5ff"},
+    {file = "fast_pytorch_kmeans-0.2.0.1.tar.gz", hash = "sha256:be03698f96f20df3beb8cbb87e0c96cc8df4a15106f6520f988750a2af00c5cf"},
+]
+
+[package.dependencies]
+numpy = "*"
+pynvml = "*"
+torch = "*"
+
+[[package]]
 name = "filelock"
 version = "3.13.1"
 description = "A platform independent file lock."
@@ -626,6 +642,17 @@ docs = ["furo", "olefile", "sphinx (>=2.4)", "sphinx-copybutton", "sphinx-inline
 tests = ["check-manifest", "coverage", "defusedxml", "markdown2", "olefile", "packaging", "pyroma", "pytest", "pytest-cov", "pytest-timeout"]
 
 [[package]]
+name = "pynvml"
+version = "11.5.0"
+description = "Python Bindings for the NVIDIA Management Library"
+optional = false
+python-versions = ">=3.6"
+files = [
+    {file = "pynvml-11.5.0-py3-none-any.whl", hash = "sha256:5cce014ac01b098d08f06178f86c37be409b80b2e903a5a03ce15eed60f55e25"},
+    {file = "pynvml-11.5.0.tar.gz", hash = "sha256:d027b21b95b1088b9fc278117f9f61b7c67f8e33a787e9f83f735f0f71ac32d0"},
+]
+
+[[package]]
 name = "python-dateutil"
 version = "2.8.2"
 description = "Extensions to the standard Python datetime module"
@@ -873,4 +900,4 @@ zstd = ["zstandard (>=0.18.0)"]
 [metadata]
 lock-version = "2.0"
 python-versions = "^3.10"
-content-hash = "bbc9181451a558abe0df5ae4567108da6c466508f0a15c4624086813c9b5dabb"
+content-hash = "d0da6ea12d0a8a3163e6c1afcac0332c9ad1c53c294403a3502bfbd52abb330c"

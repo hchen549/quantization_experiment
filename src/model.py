@@ -2,6 +2,9 @@
 from collections import OrderedDict, defaultdict
 import torch
 from torch import nn
+from torch.nn import parameter
+
+from k_means import k_means_quantize, update_codebook
 
 
 class VGG(nn.Module):
@@ -45,3 +48,32 @@ class VGG(nn.Module):
     # classifier: [N, 512] => [N, 10]
     x = self.classifier(x)
     return x
+  
+
+class KMeansQuantizer:
+    def __init__(self, model : nn.Module, bitwidth=4):
+        self.codebook = KMeansQuantizer.quantize(model, bitwidth)
+
+    @torch.no_grad()
+    def apply(self, model, update_centroids):
+        for name, param in model.named_parameters():
+            if name in self.codebook:
+                # TODO: What is the point of updating centroids ?
+                if update_centroids:
+                    update_codebook(param, codebook=self.codebook[name])
+                self.codebook[name] = k_means_quantize(
+                    param, codebook=self.codebook[name])
+
+    @staticmethod
+    @torch.no_grad()
+    def quantize(model: nn.Module, bitwidth=4):
+        codebook = dict()
+        if isinstance(bitwidth, dict):
+            for name, param in model.named_parameters():
+                if name in bitwidth:
+                    codebook[name] = k_means_quantize(param, bitwidth=bitwidth[name])
+        else:
+            for name, param in model.named_parameters():
+                if param.dim() > 1:
+                    codebook[name] = k_means_quantize(param, bitwidth=bitwidth)
+        return codebook

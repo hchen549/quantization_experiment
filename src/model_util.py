@@ -35,3 +35,4 @@ def download_url(url, model_dir='.', overwrite=False):
         os.remove(os.path.join(model_dir, 'download.lock'))
         sys.stderr.write('Failed to download from url %s' % url + '\n' + str(e) + '\n')
         return None
+    
